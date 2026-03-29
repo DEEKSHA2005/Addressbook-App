@@ -29,21 +29,32 @@ public class AddressBookService {
         return addressBook;
     }
 
-    // GET BY ID
+    // GET BY ID (IMPROVED)
     public AddressBookModel getById(int id) {
+        if (!addressBook.containsKey(id)) {
+            throw new RuntimeException("Address not found with id: " + id);
+        }
         return addressBook.get(id);
     }
 
-    // UPDATE
+    // UPDATE (IMPROVED)
     public AddressBookModel update(int id, AddressBookDTO dto) {
+        if (!addressBook.containsKey(id)) {
+            throw new RuntimeException("Cannot update. Address not found with id: " + id);
+        }
+
         AddressBookModel model = addressBook.get(id);
         model.setName(dto.getName());
         model.setCity(dto.getCity());
+
         return model;
     }
 
-    // DELETE
+    // DELETE (IMPROVED)
     public void delete(int id) {
+        if (!addressBook.containsKey(id)) {
+            throw new RuntimeException("Cannot delete. Address not found with id: " + id);
+        }
         addressBook.remove(id);
     }
 }
