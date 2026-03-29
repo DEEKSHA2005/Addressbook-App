@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbook.controller;
 
+import com.bridgelabz.addressbook.dto.AddressBookDTO;
+import com.bridgelabz.addressbook.model.AddressBookModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,36 +11,45 @@ import java.util.*;
 @RequestMapping("/addressbook")
 public class AddressBookController {
 
-    // Temporary in-memory storage
-    private Map<Integer, String> addressBook = new HashMap<>();
+    private Map<Integer, AddressBookModel> addressBook = new HashMap<>();
     private int idCounter = 1;
+
+    // CREATE
+    @PostMapping
+    public ResponseEntity<AddressBookModel> create(@RequestBody AddressBookDTO dto) {
+
+        AddressBookModel model = new AddressBookModel();
+        model.setId(idCounter++);
+        model.setName(dto.getName());
+        model.setCity(dto.getCity());
+
+        addressBook.put(model.getId(), model);
+
+        return ResponseEntity.ok(model);
+    }
 
     // GET ALL
     @GetMapping
-    public ResponseEntity<Map<Integer, String>> getAll() {
+    public ResponseEntity<Map<Integer, AddressBookModel>> getAll() {
         return ResponseEntity.ok(addressBook);
     }
 
     // GET BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<String> getById(@PathVariable int id) {
+    public ResponseEntity<AddressBookModel> getById(@PathVariable int id) {
         return ResponseEntity.ok(addressBook.get(id));
-    }
-
-    // CREATE
-    @PostMapping
-    public ResponseEntity<String> create(@RequestBody String name) {
-        addressBook.put(idCounter, name);
-        idCounter++;
-        return ResponseEntity.ok("Created Successfully");
     }
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable int id,
-                                         @RequestBody String name) {
-        addressBook.put(id, name);
-        return ResponseEntity.ok("Updated Successfully");
+    public ResponseEntity<AddressBookModel> update(@PathVariable int id,
+                                                   @RequestBody AddressBookDTO dto) {
+
+        AddressBookModel model = addressBook.get(id);
+        model.setName(dto.getName());
+        model.setCity(dto.getCity());
+
+        return ResponseEntity.ok(model);
     }
 
     // DELETE
