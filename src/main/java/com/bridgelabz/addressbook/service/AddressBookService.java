@@ -5,6 +5,7 @@ import com.bridgelabz.addressbook.model.AddressBookModel;
 import com.bridgelabz.addressbook.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.bridgelabz.addressbook.exception.AddressBookException;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class AddressBookService {
     // GET BY ID
     public AddressBookModel getById(int id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Address not found with id: " + id));
+                .orElseThrow(() -> new AddressBookException("Address not found with id: " + id));
     }
 
     // UPDATE
