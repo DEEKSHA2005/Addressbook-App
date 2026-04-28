@@ -38,39 +38,132 @@ com.bridgelabz.addressbook
 
 ---
 
-## Sections
-
-### 🔹 Section 1 — Spring Boot Setup
-
-* Created Spring Boot project
-* Configured dependencies
-* Set up project structure
-* Ran application
+# Use Case Descriptions (UC1 – UC13)
 
 ---
 
-### 🔹 Section 2 — REST API Development
+## 🔹 Section 1 — Project Setup & REST API
 
-* Built REST APIs using Spring Web
-* Created controllers and endpoints
-* Tested APIs using Postman
+### 🔸 UC1 — Address Book Setup
 
----
+Initializes the Spring Boot project and sets up the base structure for the Address Book application.
 
-### 🔹 Section 3 — CRUD & Database Integration
+### 🔸 UC2 — Address Book REST API
 
-* Implemented CRUD operations
-* Added Service & Repository layers
-* Integrated MySQL using Spring Data JPA
-* Configured application properties
+Creates REST controller and exposes basic API endpoints for handling HTTP requests.
 
 ---
 
-### 🔹 Section 4 — Validation & Exception Handling
+## 🔹 Section 2 — Application Layers
 
-* Applied input validation
-* Handled validation errors globally
-* Implemented custom exception handling
-* Returned clean and user-friendly API responses
+### 🔸 UC3 — DTO & Model Creation
+
+Defines `AddressBookDTO` and `AddressBookModel` classes for data transfer and entity representation.
+
+### 🔸 UC4 — Service Layer Implementation
+
+Implements business logic inside the service layer.
+
+### 🔸 UC5 — Address Book Service Operations
+
+Implements core operations like create, read, update, and delete in the service layer.
+
+---
+
+## 🔹 Section 3 — Logging & Database
+
+### 🔸 UC6 — Lombok Setup
+
+Uses Lombok annotations to reduce boilerplate code (getters, setters, constructors).
+
+### 🔸 UC7 — Logging Implementation
+
+Implements logging using Lombok (`@Slf4j`) for tracking application flow.
+
+### 🔸 UC8 — Logging Profiles
+
+Configures logging levels and patterns using environment-based profiles (dev, prod).
+
+### 🔸 UC9 — Database Configuration
+
+Integrates MySQL database using Spring Data JPA and environment-based configuration.
+
+---
+
+## 🔹 Section 4 — Validation & Exception Handling
+
+### 🔸 UC10 — Input Validation
+
+Applies validation on input fields using annotations like `@NotBlank` and `@Pattern`.
+
+### 🔸 UC11 — Validation Exception Handling
+
+Handles validation errors globally using `@RestControllerAdvice` and returns clean responses.
+
+### 🔸 UC12 — Custom Exception Handling
+
+Implements custom exception (`AddressBookException`) to handle cases like ID not found.
+
+---
+
+#  API Endpoints
+
+### 🔹 Create Address
+
+```http
+POST /addressbook
+```
+
+### 🔹 Get All Addresses
+
+```http
+GET /addressbook
+```
+
+### 🔹 Get Address By ID
+
+```http
+GET /addressbook/{id}
+```
+
+### 🔹 Update Address
+
+```http
+PUT /addressbook/{id}
+```
+
+### 🔹 Delete Address
+
+```http
+DELETE /addressbook/{id}
+```
+
+---
+
+#  Sample Outputs
+
+### ✅ Create Success
+
+```json
+{
+  "id": 1,
+  "name": "Deeksha",
+  "city": "Chennai"
+}
+```
+
+---
+
+### ✅ Get All
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Deeksha",
+    "city": "Chennai"
+  }
+]
+```
 
 ---
